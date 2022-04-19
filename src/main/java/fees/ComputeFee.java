@@ -34,15 +34,12 @@ public class ComputeFee {
 
     // apply best fee in order. For example, 2hs 15min will apply 2 x 1hr fee + 1 x 15min fee
     for (Fee fee : feesSet) {
-      applyFee(fee);
-      /*
+      //applyFee(fee);
       if (minutesToPrice / fee.getTimeFraction() > 0) {
         int units = minutesToPrice / fee.getTimeFraction();
         price += units * fee.getFractionPrice();
         minutesToPrice -= units * fee.getTimeFraction();
       }
-
-       */
     }
 
     // Leftover minutes. For example, 1hs 3min, minutesToPrice = 3.
@@ -73,8 +70,9 @@ public class ComputeFee {
     int day = calendar.get(Calendar.DAY_OF_WEEK);
 
     //Checks whether the day is not Monday to add the normal fee, else in the weekend use the discounted rate
+
     if (day == Calendar.MONDAY) {
-      feesSet.add(new OtherFee(minutes, price));
+      feesSet.add(new MondaysFee(minutes, price));
     } else {
       feesSet.add(new Fee(minutes, price));
     }

@@ -15,6 +15,8 @@ public class Fee {
     return timeFraction;
   }
 
+
+
   public float getFractionPrice() {
     return fractionPrice;
   }
