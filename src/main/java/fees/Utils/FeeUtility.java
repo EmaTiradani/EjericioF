@@ -1,15 +1,17 @@
-package fees;
+package fees.Utils;
+
+import fees.Fee;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class FeeUtility {
-    public static String feeString(List<StandardFee> feesSet) {
+    public static String feeString(List<Fee> feesSet) {
 
         sortFeesAscending(feesSet);
 
         StringBuilder result = new StringBuilder();
-        for (StandardFee fee : feesSet) {
+        for (Fee fee : feesSet) {
 
             result
                     .append(minutesToHsMin(fee.getTimeFraction()))
@@ -40,17 +42,17 @@ public class FeeUtility {
         return timeString.toString();
     }
 
-    public static void sortFeesAscending(List<StandardFee> feesSet){
-        feesSet.sort(new Comparator<StandardFee>() {
-            @Override public int compare(StandardFee o1, StandardFee o2) {
+    public static void sortFeesAscending(List<Fee> feesSet){
+        feesSet.sort(new Comparator<Fee>() {
+            @Override public int compare(Fee o1, Fee o2) {
                 return o1.getTimeFraction() - o2.getTimeFraction();
             }
         });
     }
 
-    public static void sortFeesDescending(List<StandardFee> feesSet){
-        feesSet.sort(new Comparator<StandardFee>() {
-            @Override public int compare(StandardFee o1, StandardFee o2) {
+    public static void sortFeesDescending(List<Fee> feesSet){
+        feesSet.sort(new Comparator<Fee>() {
+            @Override public int compare(Fee o1, Fee o2) {
                 return o2.getTimeFraction() - o1.getTimeFraction();
             }
         });

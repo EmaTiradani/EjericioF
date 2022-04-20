@@ -1,5 +1,7 @@
 import controller.JSkiRentingPriceController;
 import fees.ComputeFee;
+import fees.Discount;
+import fees.MondaysDiscount;
 import org.junit.Before;
 import org.junit.Test;
 import view.JSkiRentingPriceView;
@@ -25,7 +27,7 @@ public class EjFTests {
 
     public void setUpMonday()  {
         ComputeFee.getInstance().resetSingleton();
-        ComputeFee.getInstance().setDate(new Date(1022, 4, 4));
+        ComputeFee.getInstance().setDate(new Date(122, 3, 4));
         parkingPriceController = new JSkiRentingPriceController();
         JSkiRentingPriceView = new JSkiRentingPriceView(parkingPriceController);
         parkingPriceController.setParkingPriceView(JSkiRentingPriceView);

@@ -3,7 +3,6 @@ package model;
 import Utils.WaitSimulator;
 import controller.JSkiRentingPriceUpdateListener;
 import fees.ComputeFee;
-import fees.FeeUtility;
 
 
 import java.util.ArrayList;
