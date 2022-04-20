@@ -16,10 +16,10 @@ public class JSkiRentingPriceController implements JSkiRentingPriceUpdateListene
   }
 
   private void initFees() {
-    ComputeFee.getInstance().TypeFeesAdd(15, 300);
-    ComputeFee.getInstance().TypeFeesAdd(60, 1000);
-    ComputeFee.getInstance().TypeFeesAdd(5 * 60, 4000);
-    ComputeFee.getInstance().TypeFeesAdd(3 * 60, 2500);
+    ComputeFee.getInstance().addFee(15, 300);
+    ComputeFee.getInstance().addFee(60, 1000);
+    ComputeFee.getInstance().addFee(5 * 60, 4000);
+    ComputeFee.getInstance().addFee(3 * 60, 2500);
   }
 
   public void onEventCalculate(int minutes) {

@@ -1,11 +1,12 @@
 package fees;
 
-public class Fee {
+public class StandardFee{
 
   private int timeFraction;
   private float fractionPrice;
+  private Discount discount;
 
-  public Fee(int timeFraction, float fractionPrice) {
+  public StandardFee(int timeFraction, float fractionPrice) {
     this.timeFraction = timeFraction;
     this.fractionPrice = fractionPrice;
   }

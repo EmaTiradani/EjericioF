@@ -2,13 +2,12 @@ package fees;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 public class ComputeFee {
 
-  private List<Fee> feesSet = new ArrayList<>();
+  private List<StandardFee> feesSet = new ArrayList<>();
   Calendar calendar = Calendar.getInstance();
   private static ComputeFee instance;
 
@@ -24,16 +23,17 @@ public class ComputeFee {
     }
     return instance;
   }
+
   //This method calculates the final price, using the the fee data in the list
   public float price(int minutes) {
 
     float price = 0;
     int minutesToPrice = minutes;
 
-    sortFeesDescending();
+    FeeUtility.sortFeesDescending(feesSet);
 
     // apply best fee in order. For example, 2hs 15min will apply 2 x 1hr fee + 1 x 15min fee
-    for (Fee fee : feesSet) {
+    for (StandardFee fee : feesSet) {
       //applyFee(fee);
       if (minutesToPrice / fee.getTimeFraction() > 0) {
         int units = minutesToPrice / fee.getTimeFraction();
@@ -51,10 +51,10 @@ public class ComputeFee {
 
     // fix overprice. For example, 11hs = $660, but 12hs = $600
 
-    sortFeesAscending();
+    FeeUtility.sortFeesAscending(feesSet);
 
     //This part was made by Estefanio, we dont get it but it totally works!!!
-    for (Fee fee : feesSet) {
+    for (StandardFee fee : feesSet) {
 
       // check price for full time fee. Example, 2hs 10min, check 3hs price
       int t = (int) Math.ceil((float)minutes / (float) fee.getTimeFraction());
@@ -66,7 +66,11 @@ public class ComputeFee {
     return price;
   }
 
-  public void TypeFeesAdd(int minutes, float price) {
+  public void addFee(int minutes, float price) {
+    /*
+    TODO uno o dos parametros mas, con eso se va a poder armar un Fee especial que calcule
+     */
+
     int day = calendar.get(Calendar.DAY_OF_WEEK);
 
     //Checks whether the day is not Monday to add the normal fee, else in the weekend use the discounted rate
@@ -74,44 +78,44 @@ public class ComputeFee {
     if (day == Calendar.MONDAY) {
       feesSet.add(new MondaysFee(minutes, price));
     } else {
-      feesSet.add(new Fee(minutes, price));
+      feesSet.add(new StandardFee(minutes, price));
     }
   }
 
   public String feeString() {
-
-    sortFeesAscending();
+    return FeeUtility.feeString(feesSet); //TODO
+    /*FeeUtility.sortFeesAscending(feesSet);
 
     StringBuilder result = new StringBuilder();
     for (Fee fee : feesSet) {
 
       result
-          .append(minutesToHsMin(fee.getTimeFraction()))
+          .append(FeeUtility.minutesToHsMin(fee.getTimeFraction()))
           .append(" - $")
           .append(fee.getFractionPrice())
           .append("\n");
 
     }
-    return result.toString();
+    return result.toString();*/
   }
 
-  private void sortFeesAscending(){
+  /*private void sortFeesAscending(){
     feesSet.sort(new Comparator<Fee>() {
       @Override public int compare(Fee o1, Fee o2) {
         return o1.getTimeFraction() - o2.getTimeFraction();
       }
     });
-  }
+  }*/
 
-  private void sortFeesDescending(){
+  /*private void sortFeesDescending(){
     feesSet.sort(new Comparator<Fee>() {
       @Override public int compare(Fee o1, Fee o2) {
         return o2.getTimeFraction() - o1.getTimeFraction();
       }
     });
-  }
+  }*/
 
-  private String minutesToHsMin(Integer minutes) {
+  /*private String minutesToHsMin(Integer minutes) {
 
     StringBuilder timeString = new StringBuilder();
 
@@ -129,7 +133,7 @@ public class ComputeFee {
 
     return timeString.toString();
   }
-
+  */
   public void resetSingleton() {
     feesSet.clear();
     calendar = Calendar.getInstance();

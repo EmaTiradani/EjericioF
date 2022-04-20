@@ -1,6 +1,6 @@
 package fees;
 
-public class MondaysFee extends Fee {
+public class MondaysFee extends StandardFee {
 
   public MondaysFee(int timeFraction, float fractionPrice) {
     super(timeFraction, fractionPrice);
