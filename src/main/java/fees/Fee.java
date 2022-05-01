@@ -5,21 +5,21 @@ import java.util.List;
 
 public class Fee {
 
-  private int timeFraction;
-  private float fractionPrice;
+  private int timeFractionInMinutes;
+  private float timeFractionPrice;
   private List<Discount> discounts = new ArrayList<>();
 
   public Fee(int timeFraction, float fractionPrice) {
-    this.timeFraction = timeFraction;
-    this.fractionPrice = fractionPrice;
+    this.timeFractionInMinutes = timeFraction;
+    this.timeFractionPrice = fractionPrice;
   }
 
-  public int getTimeFraction() {
-    return timeFraction;
+  public int getTimeFractionInMinutes() {
+    return timeFractionInMinutes;
   }
 
-  public float getFractionPrice() {
-    return applyDiscounts(fractionPrice);
+  public float getTimeFractionPrice() {
+    return applyDiscounts(timeFractionPrice);
   }
 
   public void addDiscount(Discount newDiscount){

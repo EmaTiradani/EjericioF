@@ -3,6 +3,7 @@ package model;
 import Utils.WaitSimulator;
 import controller.JSkiRentingPriceUpdateListener;
 import fees.ComputeFee;
+import fees.Utils.FeeUtility;
 
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ class JSkiRentingModelImpl implements JSkiRentingModel {
 
   @Override public void calculatePrice(JSkiRentingPriceUpdateListener listener, int minutes) {
 
-    float price = computeFee.price(minutes);
+    float price = computeFee.finalPrice(minutes);
     simulatedStoreinRepo(new Ticket(price, minutes));
 
     listener.didUpdateParkingPrice(price);
@@ -31,7 +32,7 @@ class JSkiRentingModelImpl implements JSkiRentingModel {
   }
 
   @Override public String getFormatedFees() {
-    return computeFee.feeString();
+    return FeeUtility.feeString(computeFee.getFees());
   }
 
   @Override

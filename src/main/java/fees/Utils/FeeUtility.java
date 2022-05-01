@@ -14,9 +14,9 @@ public class FeeUtility {
         for (Fee fee : feesSet) {
 
             result
-                    .append(minutesToHsMin(fee.getTimeFraction()))
+                    .append(minutesToHsMin(fee.getTimeFractionInMinutes()))
                     .append(" - $")
-                    .append(fee.getFractionPrice())
+                    .append(fee.getTimeFractionPrice())
                     .append("\n");
 
         }
@@ -45,7 +45,7 @@ public class FeeUtility {
     public static void sortFeesAscending(List<Fee> feesSet){
         feesSet.sort(new Comparator<Fee>() {
             @Override public int compare(Fee o1, Fee o2) {
-                return o1.getTimeFraction() - o2.getTimeFraction();
+                return o1.getTimeFractionInMinutes() - o2.getTimeFractionInMinutes();
             }
         });
     }
@@ -53,7 +53,7 @@ public class FeeUtility {
     public static void sortFeesDescending(List<Fee> feesSet){
         feesSet.sort(new Comparator<Fee>() {
             @Override public int compare(Fee o1, Fee o2) {
-                return o2.getTimeFraction() - o1.getTimeFraction();
+                return o2.getTimeFractionInMinutes() - o1.getTimeFractionInMinutes();
             }
         });
     }
