@@ -9,6 +9,7 @@ import javax.swing.event.ChangeListener;
 
 import controller.JSkiRentingPriceController;
 import model.JSkiRentingModel;
+import model.JSkiRentingModelListener;
 import model.JSkiRentingModule;
 
 public class JSkiRentingPriceView {
@@ -36,6 +37,13 @@ public class JSkiRentingPriceView {
 
   private void initListeners() {
     calculateBtn.addActionListener(e -> requestPrice());
+
+    JSkiRentingModel.addListener(new JSkiRentingModelListener() {
+      @Override
+      public void didComputeFee() {
+        updatePriceResult(JSkiRentingModel.getFormatedTickets()); //TODO que tendria que mandarle aca?
+      }
+    });
 
     tabbedPane1.addChangeListener(changeEvent -> {
       if(tabbedPane1.getSelectedIndex() == 1) transactionsTextArea.setText(JSkiRentingModel.getFormatedTickets());

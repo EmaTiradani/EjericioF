@@ -11,6 +11,7 @@ import java.util.ArrayList;
 class JSkiRentingModelImpl implements JSkiRentingModel {
   private ArrayList<Ticket> repo = new ArrayList<Ticket>();
   private ComputeFee computeFee = ComputeFee.getInstance();
+  private ArrayList<JSkiRentingModelListener> listeners = new ArrayList<>();
 
   JSkiRentingModelImpl() { }
 
