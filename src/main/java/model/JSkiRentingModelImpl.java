@@ -1,7 +1,6 @@
 package model;
 
 import Utils.WaitSimulator;
-import controller.JSkiRentingPriceUpdateListener;
 import fees.ComputeFee;
 import fees.Utils.FeeUtility;
 import model.repository.NonPersistentTicketsRepository;
@@ -28,7 +27,16 @@ class JSkiRentingModelImpl implements JSkiRentingModel {
     float price = computeFee.finalPrice(minutes);
     simulatedStoreinRepo(new Ticket(price, minutes));
 
+
+    //TODO le avisa a la vista que realizo un cambio
+    notifyListeners();
     //listener.didUpdateParkingPrice(price);
+  }
+
+  private void notifyListeners(){
+    for(JSkiRentingModelListener listener : listeners){
+      listener.didComputeFee();
+    }
   }
 
   private void simulatedStoreinRepo(Ticket ticket){

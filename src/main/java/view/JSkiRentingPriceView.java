@@ -2,12 +2,13 @@ package view;
 
 import javax.swing.*;
 
+import controller.JSkiRentingController;
 import controller.JSkiRentingPriceControllerImpl;
 import model.JSkiRentingModel;
 import model.JSkiRentingModelListener;
 import model.JSkiRentingModule;
 
-public class JSkiRentingPriceView {
+public class JSkiRentingPriceView implements BaseView{
   private JButton calculateBtn;
   private JLabel priceLbl;
   public JPanel content;
@@ -31,7 +32,8 @@ public class JSkiRentingPriceView {
   }
 
   private void initListeners() {
-    calculateBtn.addActionListener(e -> requestPrice());
+    //calculateBtn.addActionListener(e -> requestPrice());
+    calculateBtn.addActionListener(actionEvent -> parkingPriceController.onEventCalculate(Integer.parseInt(transactionsTextArea.getText())));
 
     JSkiRentingModel.addListener(new JSkiRentingModelListener() {
       @Override
@@ -76,4 +78,16 @@ public class JSkiRentingPriceView {
 
     parkingPriceController.onEventCalculate(hs * 60 + mins);
   }
+
+  @Override
+  public void startWaitingStatus() {
+
+  }
+
+  @Override
+  public void stopWaitingStatus() {
+
+  }
+
+
 }

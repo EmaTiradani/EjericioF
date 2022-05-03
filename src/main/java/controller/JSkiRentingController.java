@@ -4,9 +4,9 @@ import view.JSkiRentingPriceView;
 
 public interface JSkiRentingController {
 
-    public void onEventCalculate(int minutes);
+    void onEventCalculate(int minutes);
 
-    public void setParkingPriceView(JSkiRentingPriceView JSkiRentingPriceView);
+    void setParkingPriceView(JSkiRentingPriceView JSkiRentingPriceView);
 
 
 }
