@@ -1,16 +1,17 @@
-package view;
+package controller;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import controller.JSkiRentingPriceController;
+import controller.JSkiRentingPriceControllerImpl;
+import view.JSkiRentingPriceView;
 
 public class Main {
 
   public static void main(String[] args) {
 
-    JSkiRentingPriceController parkingPriceController =
-        new JSkiRentingPriceController();
+    JSkiRentingPriceControllerImpl parkingPriceController =
+        new JSkiRentingPriceControllerImpl();
 
     JSkiRentingPriceView JSkiRentingPriceView =
         new JSkiRentingPriceView(parkingPriceController);

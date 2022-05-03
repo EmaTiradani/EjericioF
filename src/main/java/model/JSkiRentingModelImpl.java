@@ -4,30 +4,38 @@ import Utils.WaitSimulator;
 import controller.JSkiRentingPriceUpdateListener;
 import fees.ComputeFee;
 import fees.Utils.FeeUtility;
+import model.repository.NonPersistentTicketsRepository;
+import model.repository.TicketsRepository;
 
 
 import java.util.ArrayList;
 
 class JSkiRentingModelImpl implements JSkiRentingModel {
-  private ArrayList<Ticket> repo = new ArrayList<Ticket>();
+  //private ArrayList<Ticket> repo = new ArrayList<Ticket>();//TODO
+  private TicketsRepository repo = new NonPersistentTicketsRepository();
   private ComputeFee computeFee = ComputeFee.getInstance();
   private ArrayList<JSkiRentingModelListener> listeners = new ArrayList<>();
 
   JSkiRentingModelImpl() { }
 
-  @Override public void calculatePrice(JSkiRentingPriceUpdateListener listener, int minutes) {
+  @Override
+  public void addListener(JSkiRentingModelListener listener) {
+
+  }
+
+  @Override public void calculatePrice(/*JSkiRentingPriceUpdateListener listener,*/ int minutes) {
 
     float price = computeFee.finalPrice(minutes);
     simulatedStoreinRepo(new Ticket(price, minutes));
 
-    listener.didUpdateParkingPrice(price);
+    //listener.didUpdateParkingPrice(price);
   }
 
   private void simulatedStoreinRepo(Ticket ticket){
     //Simulates the times it takes to store this in an external repo!!!
     new Thread(() -> {
         WaitSimulator.simulateLongWait();
-        repo.add(ticket);
+        repo.add(ticket); //TODO
     }).start();
 
   }
@@ -39,7 +47,8 @@ class JSkiRentingModelImpl implements JSkiRentingModel {
   @Override
   public String getFormatedTickets() {
     String formatedTickets = "";
-    for(Ticket ticket: repo)
+    ArrayList<Ticket> tickets = repo.getTickets();
+    for(Ticket ticket: tickets) // TODO (creo que esta eh)
       formatedTickets += ticket.id + ": " + ticket.totalPrice + "$, " + ticket.minutesUsed + "mins\n";
     return formatedTickets;
   }

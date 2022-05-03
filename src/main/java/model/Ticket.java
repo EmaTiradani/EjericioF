@@ -18,4 +18,12 @@ public class Ticket {
         expendedDate = Calendar.getInstance().getTime();
         id = lastID++;
     }
+
+    public boolean hasSameID(Ticket otherTicket){
+        return (otherTicket.getID()==this.id);
+    }
+
+    public int getID(){
+        return id;
+    }
 }

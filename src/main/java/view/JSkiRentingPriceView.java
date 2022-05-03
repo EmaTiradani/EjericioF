@@ -1,13 +1,8 @@
 package view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-import controller.JSkiRentingPriceController;
+import controller.JSkiRentingPriceControllerImpl;
 import model.JSkiRentingModel;
 import model.JSkiRentingModelListener;
 import model.JSkiRentingModule;
@@ -15,17 +10,17 @@ import model.JSkiRentingModule;
 public class JSkiRentingPriceView {
   private JButton calculateBtn;
   private JLabel priceLbl;
-  protected JPanel content;
+  public JPanel content;
   private JTextArea feesTextArea;
   private JSpinner spinnerHs;
   private JSpinner spinnerMins;
   private JTabbedPane tabbedPane1;
   private JTextArea transactionsTextArea;
 
-  private JSkiRentingPriceController parkingPriceController;
+  private JSkiRentingPriceControllerImpl parkingPriceController;
   private JSkiRentingModel JSkiRentingModel = JSkiRentingModule.getInstance().getParkingModel();
 
-  public JSkiRentingPriceView(JSkiRentingPriceController parkingPriceController) {
+  public JSkiRentingPriceView(JSkiRentingPriceControllerImpl parkingPriceController) {
 
     this.parkingPriceController = parkingPriceController;
 
@@ -41,7 +36,7 @@ public class JSkiRentingPriceView {
     JSkiRentingModel.addListener(new JSkiRentingModelListener() {
       @Override
       public void didComputeFee() {
-        updatePriceResult(JSkiRentingModel.getFormatedTickets()); //TODO que tendria que mandarle aca?
+        updatePriceField();
       }
     });
 
@@ -54,9 +49,9 @@ public class JSkiRentingPriceView {
     feesTextArea.setText(JSkiRentingModel.getFormatedFees());
   }
 
-  public void updatePriceResult(float price) {
+  /*public void updatePriceResult(float price) {
     priceLbl.setText("$" + price);
-  }
+  }*/
 
   public String getShowedPrice(){ return priceLbl.getText(); }
 
