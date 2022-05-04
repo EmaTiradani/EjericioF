@@ -33,12 +33,13 @@ public class JSkiRentingPriceView implements BaseView{
 
   private void initListeners() {
     //calculateBtn.addActionListener(e -> requestPrice());
-    calculateBtn.addActionListener(actionEvent -> parkingPriceController.onEventCalculate(Integer.parseInt(transactionsTextArea.getText())));
+    calculateBtn.addActionListener(actionEvent -> requestPrice());
+
 
     JSkiRentingModel.addListener(new JSkiRentingModelListener() {
       @Override
       public void didComputeFee() {
-        updatePriceField();
+        updatePriceResult();
       }
     });
 
@@ -51,9 +52,9 @@ public class JSkiRentingPriceView implements BaseView{
     feesTextArea.setText(JSkiRentingModel.getFormatedFees());
   }
 
-  /*public void updatePriceResult(float price) {
-    priceLbl.setText("$" + price);
-  }*/
+  public void updatePriceResult(/*float price*/) {
+    priceLbl.setText("$" + JSkiRentingModel.getFinalPrice());
+  }
 
   public String getShowedPrice(){ return priceLbl.getText(); }
 
@@ -73,21 +74,12 @@ public class JSkiRentingPriceView implements BaseView{
 
     if (mins >= 60) {
       spinnerMins.setValue(mins % 60);
+      spinnerHs.setValue(hs - mins%60);
       mins = mins % 60;
     }
 
+
     parkingPriceController.onEventCalculate(hs * 60 + mins);
   }
-
-  @Override
-  public void startWaitingStatus() {
-
-  }
-
-  @Override
-  public void stopWaitingStatus() {
-
-  }
-
 
 }

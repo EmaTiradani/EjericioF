@@ -10,4 +10,5 @@ public interface JSkiRentingModel {
 
   String getFormatedTickets();
 
+  float getFinalPrice();
 }

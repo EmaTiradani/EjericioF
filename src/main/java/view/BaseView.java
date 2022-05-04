@@ -2,9 +2,7 @@ package view;
 
 public interface BaseView {
 
-    void startWaitingStatus();
+    public String getShowedPrice();
 
-    void stopWaitingStatus();
-
-
+    public void updatePriceResult();
 }

@@ -34,12 +34,10 @@ public class JSkiRentingPriceControllerImpl implements JSkiRentingController {
 
   public void onEventCalculate(int minutes) {
     //JSkiRentingModel.calculatePrice(this, minutes);
-    taskThread = new Thread(()-> {
-      JSkiRentingPriceView.startWaitingStatus();//TODO
-      JSkiRentingModel.calculatePrice(minutes);
-      JSkiRentingPriceView.stopWaitingStatus();//TODO
-    });
-    taskThread.start();
+    //taskThread = new Thread(()-> {
+    JSkiRentingModel.calculatePrice(minutes);
+    //});
+    //taskThread.start();
   }
 
   public void setParkingPriceView(JSkiRentingPriceView JSkiRentingPriceView) {
