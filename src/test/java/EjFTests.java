@@ -18,7 +18,6 @@ public class EjFTests {
         ComputeFee.getInstance().setDate(new Date(1022, 4, 5));
         parkingPriceController = new JSkiRentingPriceControllerImpl();
         JSkiRentingPriceView = new JSkiRentingPriceView(parkingPriceController);
-        parkingPriceController.setParkingPriceView(JSkiRentingPriceView);
     }
 
     public void setUpMonday()  {
@@ -26,7 +25,6 @@ public class EjFTests {
         ComputeFee.getInstance().setDate(new Date(1022, 4, 4));
         parkingPriceController = new JSkiRentingPriceControllerImpl();
         JSkiRentingPriceView = new JSkiRentingPriceView(parkingPriceController);
-        parkingPriceController.setParkingPriceView(JSkiRentingPriceView);
     }
 
     @Test

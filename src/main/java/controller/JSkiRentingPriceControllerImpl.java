@@ -12,8 +12,6 @@ import view.JSkiRentingPriceView;
 public class JSkiRentingPriceControllerImpl implements JSkiRentingController {
 
   private JSkiRentingModel JSkiRentingModel = JSkiRentingModule.getInstance().getParkingModel();
-  private JSkiRentingPriceView JSkiRentingPriceView;
-  private Thread taskThread;
 
   public JSkiRentingPriceControllerImpl() {
     initFees();
@@ -33,21 +31,7 @@ public class JSkiRentingPriceControllerImpl implements JSkiRentingController {
   }
 
   public void onEventCalculate(int minutes) {
-    //JSkiRentingModel.calculatePrice(this, minutes);
-    //taskThread = new Thread(()-> {
     JSkiRentingModel.calculatePrice(minutes);
-    //});
-    //taskThread.start();
   }
 
-  public void setParkingPriceView(JSkiRentingPriceView JSkiRentingPriceView) {
-    this.JSkiRentingPriceView = JSkiRentingPriceView;
-  }
-
-  /*@Override public void didUpdateParkingPrice(float price) {
-    //JSkiRentingPriceView.updatePriceResult(price);
-    JSkiRentingPriceView.updatePriceField();
-  }*/
 }
-
-//TODO modelo solo procesa y avisa

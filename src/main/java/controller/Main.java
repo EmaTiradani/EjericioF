@@ -16,7 +16,7 @@ public class Main {
     JSkiRentingPriceView JSkiRentingPriceView =
         new JSkiRentingPriceView(parkingPriceController);
 
-    parkingPriceController.setParkingPriceView(JSkiRentingPriceView);
+    //parkingPriceController.setParkingPriceView(JSkiRentingPriceView);
 
     JFrame frame = new JFrame("");
     frame.setContentPane(JSkiRentingPriceView.content);

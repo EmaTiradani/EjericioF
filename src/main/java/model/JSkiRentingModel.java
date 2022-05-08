@@ -4,7 +4,7 @@ public interface JSkiRentingModel {
 
   void addListener(JSkiRentingModelListener listener);
 
-  void calculatePrice(/*JSkiRentingPriceUpdateListener listener,*/ int minutes);
+  void calculatePrice(int minutes);
 
   String getFormatedFees();
 

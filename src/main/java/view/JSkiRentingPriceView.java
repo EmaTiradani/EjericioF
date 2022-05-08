@@ -28,13 +28,10 @@ public class JSkiRentingPriceView implements BaseView{
     initListeners();
     updatePriceField();
 
-
   }
 
   private void initListeners() {
-    //calculateBtn.addActionListener(e -> requestPrice());
     calculateBtn.addActionListener(actionEvent -> requestPrice());
-
 
     JSkiRentingModel.addListener(new JSkiRentingModelListener() {
       @Override
@@ -77,7 +74,6 @@ public class JSkiRentingPriceView implements BaseView{
       spinnerHs.setValue(hs - mins%60);
       mins = mins % 60;
     }
-
 
     parkingPriceController.onEventCalculate(hs * 60 + mins);
   }
